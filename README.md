@@ -17,5 +17,11 @@ student information
 
   python language requiremnts
     .python  3.14.3
-    
+
+  download Visual Studio Code 
+    .install its extensions for c lanuage
+
+Note: i have been using Visual Studio Code to run my c language instead of BlockCode platform 
+  
+  
     
