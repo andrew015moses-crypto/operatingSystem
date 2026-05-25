@@ -1,0 +1,15 @@
+*.o
+*.out
+*.pyc
+__pycache__/
+venv/
+.DS_Store
+c_core/eduos
+c_core/race_demo
+c_core/race_demo_fixed
+c_core/valgrind_output.txt
+c_core/pcb_snapshot.json
+python_scheduler/__pycache__/
+controller/__pycache__/
+docs/screenshots/*.png
+simulation_report.json
