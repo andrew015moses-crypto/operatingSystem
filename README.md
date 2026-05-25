@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Module: 351 CS 2104 — Operating Systems
 Semester: III
 Student: Andrew Rashid Moses
@@ -60,3 +61,5 @@ Part 4 — Integration Controller
 cd controller/
 
 python3 main_controller.py
+ 
+>>>>>>> 7df002b0c7c2de07062bebc042c23bcecfe444c8
