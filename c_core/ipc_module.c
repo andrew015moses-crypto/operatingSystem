@@ -172,17 +172,45 @@ void demo_anonymous_pipe(void)
         return;
     }
 
-    /* Build environment for the child: mark it as child + pass read handle */
+    /*
+     * Build the environment block manually — NOT via snprintf.
+     *
+     * A Windows env block is: "KEY=VALUE\0KEY=VALUE\0\0"
+     * snprintf stops at the first \0, so we use memcpy offsets.
+     */
     char env_block[512];
-    snprintf(env_block, sizeof(env_block),
-             "EDUOS_PIPE_CHILD=1\0EDUOS_PIPE_READ=%lld\0\0",
-             (long long)(intptr_t)hReadPipe);
+    memset(env_block, 0, sizeof(env_block));
+    {
+        /* var1: EDUOS_PIPE_CHILD=1 */
+        const char part1[] = "EDUOS_PIPE_CHILD=1";
+        /* var2: EDUOS_PIPE_READ=<handle number> */
+        const char part2_key[] = "EDUOS_PIPE_READ=";
+        char part2_val[64];
+        snprintf(part2_val, sizeof(part2_val),
+                 "%lld", (long long)(intptr_t)hReadPipe);
+
+        size_t off = 0;
+        memcpy(env_block + off, part1, sizeof(part1));
+        off += sizeof(part1);                        /* includes \0 */
+        memcpy(env_block + off, part2_key, strlen(part2_key));
+        off += strlen(part2_key);
+        memcpy(env_block + off, part2_val, strlen(part2_val));
+        off += strlen(part2_val);
+        env_block[off++] = '\0';                   /* end of var2 */
+        env_block[off]   = '\0';                   /* block terminator */
+    }
 
     /* Get our own executable path */
     char exe_path[MAX_PATH];
     GetModuleFileNameA(NULL, exe_path, MAX_PATH);
 
-    STARTUPINFOA        si = { sizeof(STARTUPINFOA) };
+    /*
+     * Zero-init STARTUPINFOA with memset, then set cb field.
+     * This avoids -Wmissing-field-initializers from { sizeof(...) }.
+     */
+    STARTUPINFOA si;
+    memset(&si, 0, sizeof(STARTUPINFOA));
+    si.cb         = sizeof(STARTUPINFOA);
     PROCESS_INFORMATION pi;
     si.dwFlags    = STARTF_USESTDHANDLES;
     si.hStdInput  = GetStdHandle(STD_INPUT_HANDLE);

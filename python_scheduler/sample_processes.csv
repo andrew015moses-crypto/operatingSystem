@@ -1,0 +1,9 @@
+pid,name,arrival_time,burst_time,priority,memory_kb
+1,init,0,8,0,512
+2,chrome,2,4,2,1024
+3,spotify,4,9,1,256
+4,python,1,5,3,512
+5,notepad,3,2,2,128
+6,explorer,0,6,1,256
+7,svchost,5,3,0,128
+8,discord,2,7,3,512

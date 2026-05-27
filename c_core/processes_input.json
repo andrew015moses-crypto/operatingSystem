@@ -1,0 +1,60 @@
+{
+  "timestamp": 1779868770,
+  "process_count": 6,
+  "processes": [
+    {
+      "pid": 1000,
+      "name": "init",
+      "arrival_time": 5,
+      "burst_time": 4,
+      "priority": 0,
+      "memory_kb": 512,
+      "state": "READY"
+    },
+    {
+      "pid": 1001,
+      "name": "chrome",
+      "arrival_time": 1,
+      "burst_time": 6,
+      "priority": 1,
+      "memory_kb": 128,
+      "state": "READY"
+    },
+    {
+      "pid": 1002,
+      "name": "python3",
+      "arrival_time": 5,
+      "burst_time": 11,
+      "priority": 0,
+      "memory_kb": 1024,
+      "state": "READY"
+    },
+    {
+      "pid": 1003,
+      "name": "notepad",
+      "arrival_time": 0,
+      "burst_time": 3,
+      "priority": 0,
+      "memory_kb": 256,
+      "state": "READY"
+    },
+    {
+      "pid": 1004,
+      "name": "explorer",
+      "arrival_time": 1,
+      "burst_time": 11,
+      "priority": 4,
+      "memory_kb": 128,
+      "state": "READY"
+    },
+    {
+      "pid": 1005,
+      "name": "svchost",
+      "arrival_time": 4,
+      "burst_time": 6,
+      "priority": 4,
+      "memory_kb": 1024,
+      "state": "READY"
+    }
+  ]
+}

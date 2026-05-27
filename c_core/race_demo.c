@@ -32,7 +32,13 @@
 #define INCREMENTS   100000
 
 static long              shared_counter = 0;
+
+/* Only declare the lock when it is actually used (FIXED build).
+ * In UNSAFE_BUILD the lock is intentionally absent — declaring it
+ * unused would trigger -Wunused-variable, so we guard it here. */
+#ifndef UNSAFE_BUILD
 static CRITICAL_SECTION  counter_lock;
+#endif
 
 /* ============================================================
    WORKER THREAD
@@ -57,10 +63,10 @@ static DWORD WINAPI counter_worker(LPVOID arg)
     return 0;
 }
 
-/* 
+/* ============================================================
    SEMAPHORE PRODUCER-CONSUMER
    Windows semaphores: CreateSemaphore / WaitForSingleObject / ReleaseSemaphore
-*/
+============================================================ */
 #define BUFFER_SIZE      5
 #define ITEMS_TO_PRODUCE 12
 
@@ -121,11 +127,11 @@ static void demo_producer_consumer(void)
     printf("=========================================\n\n");
 }
 
-/* 
+/* ============================================================
    DEADLOCK FIX DEMO
    Both threads lock in the same order (A then B).
    No deadlock possible.
-*/
+============================================================ */
 #ifndef UNSAFE_BUILD
 static CRITICAL_SECTION mutex_A;
 static CRITICAL_SECTION mutex_B;
@@ -158,7 +164,9 @@ static DWORD WINAPI fixed_thread_y(LPVOID arg)
 }
 #endif
 
-/*MAIN*/
+/* ============================================================
+   MAIN
+============================================================ */
 int main(void)
 {
 #ifdef UNSAFE_BUILD
