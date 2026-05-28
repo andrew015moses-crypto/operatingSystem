@@ -60,4 +60,17 @@ Part 4 — Integration Controller
 cd controller/
 
 python3 main_controller.py
+
+
+commands to use for ruuning the main file 
+  1st navigate to main controller file
+  then type: python main_controller.py
+  as shown below
+
+  "PS C:\Users\123\Desktop\eduOs\controller> python          main_controller.py"
+
+note: 
+.have installed visual studio code and extension for c and python
+.that we push and comminting the file is done in the terminal of visual studio code through its new terminal  
+.running the program am using powershell by running it as an adminstrater and then navigate to the folder containing my assignment
  
